@@ -1,0 +1,28 @@
+{% load static %}
+<!doctype html> 
+<html>
+<head>
+
+    <title>
+    {% block title%}
+
+
+    {% endblock title%}
+    </title>
+
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
+    <link rel="stylesheet" href="css/style.css?v=1.333"  />
+
+    {% block header %}
+    {% endblock header %}
+</head>
+<body>
+    {% block content %}
+
+    {% endblock content %}
+</body>
+
+    {% block footer %}
+
+    {% endblock footer %}
+</html>
