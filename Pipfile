@@ -8,6 +8,9 @@ verify_ssl = true
 [packages]
 django = "*"
 python-dotenv = "*"
+pillow = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [requires]
 python_version = "3.8"
