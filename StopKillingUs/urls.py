@@ -22,6 +22,7 @@ from core import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('privacy/', core_views.privacyPolicy, name='privacy'),
     path('', core_views.index, name='home'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
