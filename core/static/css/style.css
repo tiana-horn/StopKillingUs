@@ -1,8 +1,17 @@
 
 .coverIMG {
     background-image: url('https://getjustice.herokuapp.com/static/img/DontShoot.png');
+    height: 777;
 }
 
-.body {
-    background-color: blue;
+body, html {
+    width:100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.map {
+    height: 100%;
+    width: 100%;
 }

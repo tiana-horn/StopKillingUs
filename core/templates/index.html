@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
+<!DOCTYPE html>
+<html>
 <head>
 
     <title>
@@ -8,9 +10,24 @@
 
     {% endblock title%}
     </title>
-
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css"/>
-    <link rel="stylesheet" href="/static/css/style.css?v=1.777"  />
+    <link rel="stylesheet" href="/static/css/style.css?v=1.333"/>
+    <script defer src="{% static 'js/main.js' %}"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+          height: 100%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+          height: 100%;
+          margin: 0;
+          padding: 0;
+        }
+      </style>
 
     {% block header %}
     {% endblock header %}
@@ -21,10 +38,22 @@
 {% block content %}
 <body>
     <div class="coverIMG">
-        <div class="tc-l mt4 mt5-m mt6-l ph3">
+        <div class="tc-l mt0 pv3">
             <h1 class="f2 f1-l fw2 mb0 lh-title"> Stop Killing Us </h1>
         </div>
     </div>
+    <div class="map" id="map"></div>
+    <script>
+        var map;
+        function initMap() {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 44.986656, lng: -93.258133},
+            zoom: 8
+          });
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initMap"
+      async defer></script>
 </body>
 {% endblock content %}
 
