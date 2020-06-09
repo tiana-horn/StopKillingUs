@@ -52,13 +52,10 @@
             center: {lat: 44.986656, lng: -93.258133},
             zoom: 8
           });
-        }
-        var script = document.createElement('script');
-        script.src = 'https://getjustice.herokuapp.com/redlining.geojson';
-        document.getElementsByTagName('head')[0].appendChild(script);
+          map.data.loadGeoJson('https://getjustice.herokuapp.com/static/img/redlining.geojson')
+      }
       </script>
-      <script src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initMap"
-      async defer></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initMap"></script>
 </body>
 {% endblock content %}
 
