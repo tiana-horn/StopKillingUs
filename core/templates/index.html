@@ -56,6 +56,9 @@
       }
       </script>
       <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initMap"></script>
+      {% for post in posts %}
+        <h2>{{ post.message }}</h2>
+      {% endfor %}
 </body>
 {% endblock content %}
 
