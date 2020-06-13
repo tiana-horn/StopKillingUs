@@ -41,7 +41,7 @@
 <body>
     <div class="coverIMG">
         <div class="tc-l mt0 pv3 center">
-            <h1 class="f2 f1-l fw2 mb0 lh-title tc"> Stop Killing Us </h1>
+            <h2 class="f2 f1-l fw2 mb0 lh-title tc"> Stop Killing Us </h2>
         </div>
     </div>
     <div class="map" id="map"></div>
@@ -56,8 +56,10 @@
       }
       </script>
       <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ google_map_key }}&callback=initMap"></script>
+      <a class="button" href="{% url 'create_post' %}"> Create Post </a>
       {% for post in posts %}
-        <h2>{{ post.message }}</h2>
+        <h1><a href="{% url 'post_detail' post_id=post.pk %}">{{ post.message }}</a></h1>
+        <h3>Posted by @{{ post.author }} at {{ post.created_at }}</h3> 
       {% endfor %}
 </body>
 {% endblock content %}
