@@ -12,6 +12,7 @@ pillow = "*"
 gunicorn = "*"
 django-heroku = "*"
 geojson = "*"
+django-registration-redux = "*"
 
 [requires]
 python_version = "3.8"

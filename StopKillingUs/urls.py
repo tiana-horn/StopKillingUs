@@ -16,14 +16,29 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from core.backends import MyRegistrationView
 from django.conf.urls.static import static
+from django.contrib.auth.views import (PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView, PasswordResetDoneView,)
 
 from core import views as core_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('privacy/', core_views.privacyPolicy, name='privacy'),
     path('', core_views.index, name='home'),
+    path('privacy/', core_views.privacyPolicy, name='privacy'),
+#Account Registration
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/register/', MyRegistrationView.as_view(), name='registration_register'),
+    path('accounts/password/done', PasswordResetCompleteView.as_view (template_name='registration/password_reset_complete.html'), name='password_reset_complete'),
+    path('accounts/password/reset/', PasswordResetView.as_view (template_name='registration/password_reset_form.html'), name="password_reset_form"),
+    path('accounts/password/reset/done', PasswordResetDoneView.as_view (template_name='registration/password_reset_done.html'), name='password_reset_done'),
+    path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view (template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
+#Posts and Comments
+    path('accounts/create_post/', core_views.create_post, name='create_post'),
+    path('post/<int:post_id>/edit/', core_views.edit_post, name='edit_post'),
+    path('post/<int:post_id>/', core_views.post_detail, name='post_detail'),
+
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
