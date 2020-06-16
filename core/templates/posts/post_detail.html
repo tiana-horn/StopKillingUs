@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% endblock title %}
+
+{% block content %}
+    <p>{{ post.author }}</p>
+    <p> {{ post.message }}</p>
+
+    <div><form role="form" action="" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <button type='submit'>Post Comment</button>
+        </form>
+    </div>
+
+    <div>
+        {% for comment in comments %}
+            <p>{{ comment.new_comment }}</p>
+            <p>{{ comment.author }}</p>
+        {% endfor %}
+    {% if user == post.author %}
+        <p>
+            <a href="{% url 'edit_post' post_id=post.pk %}">
+            Edit
+            </a>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'post_detail' post_id=post.pk %}">
+            Comment!
+            </a>
+        </p>  
+
+    {% endif %}
+{% endblock content %}

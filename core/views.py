@@ -8,8 +8,6 @@ from django.http import Http404
 from django.contrib.auth import authenticate, login
 
 
-
-
 def index(request):
     posts = Post.objects.all()
     form_class = PostForm
@@ -28,10 +26,11 @@ def create_post(request):
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
-            post = form.save(commmit=False)
-            post.author = request.User
+            post = form.save(commit=False)
+            post.author = request.user
+            post.pk = post.id
             post.save()
-            return redirect('post_detail', pk=post_id)
+            return redirect('post_detail', post_id=post.pk)
     else: 
         form = form_class()
     return render(request, 'posts/create_post.html',{
@@ -44,10 +43,11 @@ def post_detail(request, post_id):
         form = CommentForm(request.POST)
         if form.is_valid:
             comment = form.save(commit=False)
-            comment.author = request.User
+            comment.author = request.user
             comment.post = post 
+            comment.pk = comment.id
             comment.save()
-            return redirect('post_detail', pk=post_id)
+            return redirect('post_detail', post_id=post.pk)
     else:
         form = CommentForm()
 
@@ -68,15 +68,13 @@ def edit_post(request, post_id):
           form = form_class(data=request.POST, instance=post)
           if form.is_valid():
                form.save()
-               return redirect("post_detail", pk=post_id)
+               return redirect("post_detail", post_id=post.pk)
      else:
           form = form_class(instance=post)
           return render(request, 'posts/edit_post.html', {
                "post": post,
                "form": form,
           })
-
-
 
 def privacyPolicy(request):
     return render(request, 'privacy.html')

@@ -34,10 +34,9 @@ urlpatterns = [
     path('accounts/password/reset/done', PasswordResetDoneView.as_view (template_name='registration/password_reset_done.html'), name='password_reset_done'),
     path('accounts/password/reset/<uidb64>/<token>/', PasswordResetConfirmView.as_view (template_name='registration/password_reset_confirm.html'), name='password_reset_confirm'),
 #Posts and Comments
-    path('accounts/create_post/', core_views.create_post, name='create_post'),
-    path('post/<int:post_id>/edit/', core_views.edit_post, name='edit_post'),
-    path('post/<int:post_id>/', core_views.post_detail, name='post_detail'),
-
+    path('posts/create_post/', core_views.create_post, name='create_post'),
+    path('posts/<int:post_id>/edit/', core_views.edit_post, name='edit_post'),
+    path('posts/<int:post_id>/', core_views.post_detail, name='post_detail'),
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
